@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Beauty Bliss</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <style>
+    /* Global styles */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Dancing Script', cursive;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      color: #4b3b6b;
+      background: linear-gradient(-45deg, #d8bfd8, #e6e0f8, #cdb4db, #a394bc);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      background-image: url('https://image.slidesdocs.com/responsive-images/background/petal-lavender-product-display-powerpoint-background_713b669621__960_540.jpg');
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: transparent;
+      color: #5a3e7c;
+      font-size: 2.5rem;
+      letter-spacing: 1.5px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header img {
+      height: 60px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+
+    header h1 {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      font-size: 2.2rem;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.9);
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 40px 30px;
+      border-radius: 25px;
+      box-shadow: 0 8px 24px rgba(165, 125, 225, 0.3);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1s ease;
+    }
+
+    .login-container h2 {
+      color: #5a3e7c;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      font-family: 'Dancing Script', cursive;
+      transition: border 0.3s, box-shadow 0.3s;
+    }
+
+    .login-container input:focus {
+      border-color: #9c67e2;
+      box-shadow: 0 0 8px #9c67e266;
+      outline: none;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #9c67e2;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1em;
+      font-family: 'Dancing Script', cursive;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+    }
+
+    .login-container button:hover {
+      background-color: #7a4eb5;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(165, 125, 225, 0.4);
+    }
+
+    #errorMsg {
+      margin-top: 12px;
+      font-size: 0.95rem;
+      color: red;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="https://png.pngtree.com/png-clipart/20221029/original/pngtree-beauty-logo-png-image_8742064.png" alt="Beauty Bliss Logo" />
+    <h1>Beauty Bliss</h1>
+  </header>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <h2>Welcome Back</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+      <p id="errorMsg"></p>
+    </form>
+  </div>
+
+  <!-- Script -->
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (username === "admin" && password === "1234") {
+        errorMsg.style.color = "green";
+        errorMsg.textContent = "Login successful! Redirecting...";
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 1500);
+      } else {
+        errorMsg.style.color = "red";
+        errorMsg.textContent = "Invalid username or password!";
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HydraGlow Moisturizer - Beauty Bliss</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Dancing Script', cursive;
+      margin: 0;
+      background: linear-gradient(-45deg, #d8bfd8, #e6e0f8, #cdb4db, #a394bc);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      color: #5a3e7c;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .product-detail {
+      max-width: 800px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(180, 147, 219, 0.3);
+      text-align: center;
+    }
+
+    .product-detail img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(165, 125, 225, 0.4);
+    }
+
+    .product-detail h1 {
+      font-size: 2.2rem;
+      margin-top: 1.2rem;
+    }
+
+    .product-detail p {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+    }
+
+    .price {
+      color: #9c67e2;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .buy-button, .cart-button {
+      margin: 10px 10px 0;
+      padding: 12px 24px;
+      font-size: 1.1rem;
+      background-color: #9c67e2;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .buy-button:hover, .cart-button:hover {
+      background-color: #7a4eb5;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 20px;
+      color: #7a4eb5;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    a.back:hover {
+      text-decoration: underline;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      box-shadow: 0 8px 25px rgba(165, 125, 225, 0.4);
+      font-family: 'Dancing Script', cursive;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      color: #7a4eb5;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1.1rem;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      font-size: 1.1rem;
+      background-color: #9c67e2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .modal-content button:hover {
+      background-color: #7a4eb5;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #7a4eb5;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #4b3b6b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-detail">
+    <img src="https://whiteningessence.com/cdn/shop/files/Moisturiser-1.jpg?v=1748412278&width=3840" alt="HydraGlow Moisturizer">
+    <h1>HydraGlow Moisturizer</h1>
+    <p>Keep your skin nourished and radiant all day with HydraGlow Moisturizer. It hydrates deeply, restores natural glow, and protects your skin barrier.</p>
+    <p class="price">$29.99</p>
+    <button class="cart-button" onclick="addToCart()">Add to Cart</button>
+    <button class="buy-button" onclick="openModal()">Buy Now</button><br>
+    <a href="home.html" class="back">← Back to Home</a>
+  </div>
+
+  <!-- Purchase Popup Modal -->
+  <div class="modal" id="purchaseModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Delivery Address</h2>
+      <form id="addressForm">
+        <input type="text" placeholder="Full Name" required />
+        <input type="text" placeholder="Address Line" required />
+        <input type="text" placeholder="City" required />
+        <input type="text" placeholder="State" required />
+        <input type="text" placeholder="Postal Code" required />
+        <input type="tel" placeholder="Phone Number" required />
+        <button type="submit">Confirm Purchase</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("purchaseModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("purchaseModal").style.display = "none";
+    }
+
+    function addToCart() {
+      const product = { id: 'product2', name: 'HydraGlow Moisturizer', price: 29.99 };
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Added HydraGlow Moisturizer to cart!");
+    }
+
+    document.getElementById("addressForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("🎉 Thank you for your purchase! Your order is on the way.");
+      closeModal();
+      window.location.href = "home.html";
+    });
+
+    window.onclick = function(event) {
+      const modal = document.getElementById("purchaseModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+  </script>
+
+</body>
+</html>
